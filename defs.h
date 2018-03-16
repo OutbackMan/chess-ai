@@ -23,4 +23,30 @@ enum {
 	H1 = 91, H2, H3, H4, H5, H6, H7, H8, NO_SQ
 };
 
+typedef struct {
+	int pieces[BRD_SQ_NUM];		
+
+	// each array for white, black and both pawn colours respectively
+	// bit will be 1 if square is owned by particular colour
+	u64 pawns[3]; 
+
+	// kings
+	int king_sq[2];
+
+	int side;
+	int en_pas;
+	int fifty_move;
+
+	int ply;
+	int his_ply;
+
+	u64 pos_key;
+
+	int piece_num[13];
+	int big_piece[3];
+	int major_piece[3];
+	int minor_piece[3];
+
+} Board;
+
 #endif
