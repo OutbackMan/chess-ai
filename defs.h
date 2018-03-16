@@ -4,6 +4,7 @@
 #include <stdint.h>
 
 #define BRD_SQ_NUM 120
+#define MAX_GAME_MOVES 2048
 
 typedef uint64_t u64;
 
@@ -23,6 +24,16 @@ enum {
 	H1 = 91, H2, H3, H4, H5, H6, H7, H8, NO_SQ
 };
 
+enum { WKCA = 1, WQCA = 2, BKCA = 4, BQCA = 8 };
+
+typedef struct {
+	int move;
+	int castle_perm;
+	int en_pas;
+	int fifty_move;
+	u64 pos_key;
+} Undo;
+
 typedef struct {
 	int pieces[BRD_SQ_NUM];		
 
@@ -40,6 +51,8 @@ typedef struct {
 	int ply;
 	int his_ply;
 
+	int castle_perm;
+
 	u64 pos_key;
 
 	int piece_num[13];
@@ -47,6 +60,9 @@ typedef struct {
 	int major_piece[3];
 	int minor_piece[3];
 
+	Undo history[GAME_MAX_MOVES];
+
 } Board;
+
 
 #endif
